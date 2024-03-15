@@ -1,0 +1,20 @@
+<h1><%=t('messages.listing', model: @admins.model_name.human(count: 2))%></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <% @admins.each do |admin| %>
+    <tr>
+      <td><%=admin.id %></td>
+      <td><%=admin.email%> </td>
+    </tr>
+  <% end %> 
+    </tr>
+  </tbody>
+</table>
