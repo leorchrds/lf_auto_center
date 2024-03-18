@@ -16,4 +16,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 Rails.application.config.assets.precompile += %w( admins_devise.css )
 Rails.application.config.assets.precompile += %w( admins_devise.js )
+Rails.application.config.assets.precompile += %w( adminlte/dist/js/adminlte.min.js )
+
 
