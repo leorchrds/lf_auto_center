@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def layout_by_resource
-    if devise_controller? && resource_class == Admin
+    if devise_controller? 
       'admins_devise'
     else
       'application'
