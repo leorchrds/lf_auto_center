@@ -38,8 +38,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap', '~> 5.3.2'
 gem 'devise'
+gem 'erb_lint'
 gem 'jquery-rails'
 gem 'rails-i18n', '~> 5.1'
+gem 'simple_form'
 gem 'tty-spinner'
 
 group :development, :test do

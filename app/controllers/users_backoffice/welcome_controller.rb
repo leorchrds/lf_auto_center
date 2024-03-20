@@ -1,4 +1,5 @@
-class UsersBackoffice::WelcomeController < UsersBackofficeController
-  def index
+module UsersBackoffice
+  class WelcomeController < BaseController
+    def index; end
   end
 end

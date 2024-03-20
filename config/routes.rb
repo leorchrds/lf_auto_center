@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   namespace :admins_backoffice do
     get 'welcome/index'
     resources :admins
@@ -8,7 +9,10 @@ Rails.application.routes.draw do
   end
   namespace :users_backoffice do
     get 'welcome/index'
+    resources :clients
   end
+
+  root to: 'site/welcome#index'
 
   devise_for :users
   devise_for :admins
@@ -21,9 +25,4 @@ Rails.application.routes.draw do
   devise_scope :admin do
     get '/admins/sign_out', to: 'devise/sessions#destroy', as: :admin_logout
   end
-
-  get 'inicio', to: 'site/welcome#index'
-
-  root to: 'site/welcome#index'
-  # Para mais detalhes sobre a DSL disponível neste arquivo, consulte http://guides.rubyonrails.org/routing.html
 end

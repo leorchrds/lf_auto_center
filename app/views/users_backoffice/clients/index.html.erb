@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Clientes</h3>
+
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Endereço</th>
+              <th>Telefone</th>
+              <th>Observações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @clients.each do |client| %>
+              <tr>
+                <td><%= client.name %></td>
+                <td><%= client.address %></td>
+                <td><%= client.phone %></td>
+                <td><%= client.observation %></td> 
+                <td>
+                  <%= link_to 'Detalhes', users_backoffice_client_path(client), class:"btn btn-primary" %>
+                  <%= link_to 'Editar', edit_users_backoffice_client_path(client), class:"btn btn-primary" %>
+                  <%= link_to 'Excluir', users_backoffice_client_path(client), method: :delete, class:"btn btn-danger", data: { confirm: 'Deseja realmente excluir este cliente ?'} %>
+                  <%= link_to 'Criar', new_users_backoffice_client_path, class: "btn btn-success" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>  
+    </div>
+  </div>
+</div>
