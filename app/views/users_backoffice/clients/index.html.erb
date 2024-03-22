@@ -40,10 +40,10 @@
                   <%= link_to 'Detalhes', users_backoffice_client_path(client), class:"btn btn-primary" %>
                   <%= link_to 'Editar', edit_users_backoffice_client_path(client), class:"btn btn-primary" %>
                   <%= link_to 'Excluir', users_backoffice_client_path(client), method: :delete, class:"btn btn-danger", data: { confirm: 'Deseja realmente excluir este cliente ?'} %>
-                  <%= link_to 'Criar', new_users_backoffice_client_path, class: "btn btn-success" %>
                 </td>
               </tr>
             <% end %>
+                              <%= link_to 'Criar', new_users_backoffice_client_path, class: "btn btn-success" %>  
           </tbody>
         </table>
       </div>  

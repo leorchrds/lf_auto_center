@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Veículos</h3>
+
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
+            <tr>
+              <th>Placa</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>cor</th>
+              <th>Ano de fabricação</th>
+              <th>Combustível</th>
+              <th>Proprietário</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @vehicles.each do |vehicle| %>
+              <tr>
+                <td><%= vehicle.license_plate %></td>
+                <td><%= vehicle.brand %></td>
+                <td><%= vehicle.model %></td>
+                <td><%= vehicle.color %></td> 
+                <td><%= vehicle.year_of_manufacture %></td> 
+                <td><%= vehicle.fuel_type %></td> 
+                <td><%= vehicle.client.name %></td> 
+                <td>
+                  <%= link_to 'Detalhes', users_backoffice_vehicle_path(vehicle), class:"btn btn-primary" %>
+                  <%= link_to 'Editar', edit_users_backoffice_vehicle_path(vehicle), class:"btn btn-primary" %>
+                  <%= link_to 'Excluir', users_backoffice_vehicle_path(vehicle), method: :delete, class:"btn btn-danger", data: { confirm: 'Deseja realmente excluír este veículo ?'} %>
+                </td>
+              </tr>
+            <% end %>
+                  <%= link_to 'Criar', new_users_backoffice_vehicle_path, class: "btn btn-success" %>
+          </tbody>
+        </table>
+      </div>  
+    </div>
+  </div>
+</div>

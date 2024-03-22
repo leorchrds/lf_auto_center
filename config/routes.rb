@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   namespace :admins_backoffice do
     get 'welcome/index'
     resources :admins
@@ -8,11 +8,12 @@ Rails.application.routes.draw do
     get 'welcome/index'
   end
   namespace :users_backoffice do
-    get 'welcome/index'
+    resources :users
     resources :clients
+    resources :vehicles
   end
 
-  root to: 'site/welcome#index'
+  root to: 'users_backoffice/welcome#index'
 
   devise_for :users
   devise_for :admins
