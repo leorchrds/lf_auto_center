@@ -1,3 +1,25 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#client_address_attributes_postal_code').on('blur', function() {
+      var cep = $(this).val().replace(/\D/g, '');
+      if (cep.length != 8) {
+        return;
+      }
+      
+      $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
+        if (!("erro" in data)) {
+          $('#client_address_attributes_street').val(data.logradouro);
+          $('#client_address_attributes_neighborhood').val(data.bairro);
+          $('#client_address_attributes_city').val(data.localidade);
+          $('#client_address_attributes_state').val(data.uf);
+          $('#client_address_attributes_country').val('Brasil');
+        }
+      });
+    });
+  });
+</script>
+
 <div class="content-wrapper" style="min-height: 502.334px;">
   <div class="content-header">
     <div class="container-fluid">
@@ -31,19 +53,38 @@
                   <% end %>
                 </div>
                 <div class="form-group">
-                  <%= f.label :address, "Endereço" %>
-                  <%= f.text_field :address, class: "form-control#{' is-invalid' if f.object.errors[:address].present?}", placeholder: "Endereço" %>
-                  <% if f.object.errors[:address].present? %>
-                    <div class="invalid-feedback">
-                      <%= f.object.errors[:address].to_sentence %>
-                    </div>
-                  <% end %>
-                </div>
-                <div class="form-group">
                   <%= f.label :observation, "Observação" %>
                   <%= f.text_field :observation, class: "form-control", placeholder: "Observação" %>
                 </div>
+                <div class="form-group">
+                  <%= f.fields_for :address do |address_fields| %>
+                    <%= address_fields.label :street, "Rua" %>
+                    <%= address_fields.text_field :street, class: "form-control" %>
+                    
+                    <%= address_fields.label :number, "Número" %>
+                    <%= address_fields.text_field :number, class: "form-control" %>
+                    
+                    <%= address_fields.label :complement, "Complemento" %>
+                    <%= address_fields.text_field :complement, class: "form-control" %>
+                    
+                    <%= address_fields.label :neighborhood, "Bairro" %>
+                    <%= address_fields.text_field :neighborhood, class: "form-control" %>
+                    
+                    <%= address_fields.label :city, "Cidade" %>
+                    <%= address_fields.text_field :city, class: "form-control" %>
+                    
+                    <%= address_fields.label :state, "Estado" %>
+                    <%= address_fields.text_field :state, class: "form-control" %>
+                    
+                    <%= address_fields.label :postal_code, "CEP" %>
+                    <%= address_fields.text_field :postal_code, class: "form-control" %>
+                    
+                    <%= address_fields.label :country, "País" %>
+                    <%= address_fields.text_field :country, class: "form-control" %>
+                  <% end %>
+                </div>
               </div>
+              
               <div class="card-footer">
                 <%= f.submit "Submit", class: "btn btn-primary" %>
               </div>

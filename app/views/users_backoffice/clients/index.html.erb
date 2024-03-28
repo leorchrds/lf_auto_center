@@ -24,7 +24,6 @@
           <thead>
             <tr>
               <th>Nome</th>
-              <th>Endereço</th>
               <th>Telefone</th>
               <th>Observações</th>
             </tr>
@@ -33,7 +32,6 @@
             <% @clients.each do |client| %>
               <tr>
                 <td><%= client.name %></td>
-                <td><%= client.address %></td>
                 <td><%= client.phone %></td>
                 <td><%= client.observation %></td> 
                 <td>
@@ -43,7 +41,7 @@
                 </td>
               </tr>
             <% end %>
-                              <%= link_to 'Criar', new_users_backoffice_client_path, class: "btn btn-success" %>  
+                  <%= link_to 'Criar', new_users_backoffice_client_path, class: "btn btn-success" %>  
           </tbody>
         </table>
       </div>  

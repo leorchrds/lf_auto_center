@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_22_031642) do
+ActiveRecord::Schema.define(version: 2024_03_27_232431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "number"
+    t.string "complement"
+    t.string "neighborhood"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
+    t.string "country"
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_addresses_on_client_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,11 +44,25 @@ ActiveRecord::Schema.define(version: 2024_03_22_031642) do
 
   create_table "clients", force: :cascade do |t|
     t.string "name"
-    t.string "address"
     t.string "phone"
     t.string "observation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "service_orders", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "vehicle_id"
+    t.integer "mileage"
+    t.datetime "entry_time"
+    t.datetime "exit_time"
+    t.date "entry_date"
+    t.date "exit_date"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_service_orders_on_client_id"
+    t.index ["vehicle_id"], name: "index_service_orders_on_vehicle_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,5 +91,8 @@ ActiveRecord::Schema.define(version: 2024_03_22_031642) do
     t.index ["client_id"], name: "index_vehicles_on_client_id"
   end
 
+  add_foreign_key "addresses", "clients"
+  add_foreign_key "service_orders", "clients"
+  add_foreign_key "service_orders", "vehicles"
   add_foreign_key "vehicles", "clients"
 end

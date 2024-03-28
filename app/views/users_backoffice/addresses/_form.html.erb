@@ -1,0 +1,115 @@
+<div class="content-wrapper" style="min-height: 502.334px;">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Novo Endereço</h3>
+            </div>
+            <%= simple_form_for([:users_backoffice, @address]) do |f| %>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+              
+              <div class="card-body">
+                <div class="form-group">
+                  <%= f.label :street, "Rua" %>
+                  <%= f.text_field :street, class: "form-control#{' is-invalid' if f.object.errors[:street].present?}", placeholder: "Rua" %>
+                  <% if f.object.errors[:street].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:street].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+                
+                <div class="form-group">
+                  <%= f.label :number, "Número" %>
+                  <%= f.text_field :number, class: "form-control#{' is-invalid' if f.object.errors[:number].present?}", placeholder: "Número" %>
+                  <% if f.object.errors[:number].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:number].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+                
+                <div class="form-group">
+                  <%= f.label :complement, "Complemento" %>
+                  <%= f.text_field :complement, class: "form-control#{' is-invalid' if f.object.errors[:complement].present?}", placeholder: "Complemento" %>
+                  <% if f.object.errors[:complement].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:complement].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :neighborhood, "Bairro" %>
+                  <%= f.text_field :neighborhood, class: "form-control#{' is-invalid' if f.object.errors[:neighborhood].present?}", placeholder: "Bairro" %>
+                  <% if f.object.errors[:neighborhood].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:neighborhood].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :city, "Cidade" %>
+                  <%= f.text_field :city, class: "form-control#{' is-invalid' if f.object.errors[:city].present?}", placeholder: "Cidade" %>
+                  <% if f.object.errors[:city].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:city].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :state, "Estado" %>
+                  <%= f.text_field :state, class: "form-control#{' is-invalid' if f.object.errors[:state].present?}", placeholder: "Estado" %>
+                  <% if f.object.errors[:state].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:state].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :postal_code, "CEP" %>
+                  <%= f.text_field :postal_code, class: "form-control#{' is-invalid' if f.object.errors[:postal_code].present?}", placeholder: "CEP" %>
+                  <% if f.object.errors[:postal_code].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:postal_code].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :country, "País" %>
+                  <%= f.text_field :country, class: "form-control#{' is-invalid' if f.object.errors[:country].present?}", placeholder: "País" %>
+                  <% if f.object.errors[:country].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:country].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label :client, "Cliente" %>
+                  <%= f.association :client, include_blank: false, class: "form-control#{' is-invalid' if f.object.errors[:client].present?}" %>
+                  <% if f.object.errors[:client].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:client].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <%= f.submit "Submit", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

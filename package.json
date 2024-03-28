@@ -1,5 +1,7 @@
 {
   "name": "lf_auto_center",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "sinesp-api": "^3.0.0"
+  }
 }

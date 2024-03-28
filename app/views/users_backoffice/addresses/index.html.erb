@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Endereço</h3>
+
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
+            <tr>
+              <th>Rua</th>
+              <th>numero</th>
+              <th>complemento</th>
+              <th>bairro</th>
+              <th>cidade</th>
+              <th>estado</th>
+              <th>cep</th>
+              <th>país</th>
+              <th>cliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @addresses.each do |address| %>
+              <tr>
+                <td><%= address.street %></td>
+                <td><%= address.number %></td>
+                <td><%= address.complement %></td> 
+                <td><%= address.neighborhood %></td> 
+                <td><%= address.city %></td> 
+                <td><%= address.state %></td> 
+                <td><%= address.postal_code %></td> 
+                <td><%= address.country %></td> 
+                <td><%= address.client.name %></td> 
+                <td>
+                  <%= link_to 'Detalhes', users_backoffice_address_path(address), class:"btn btn-primary" %>
+                  <%= link_to 'Editar', edit_users_backoffice_address_path(address), class:"btn btn-primary" %>
+                  <%= link_to 'Excluir', users_backoffice_address_path(address), method: :delete, class:"btn btn-danger", data: { confirm: 'Deseja realmente excluir este endereço ?'} %>
+                </td>
+              </tr>
+            <% end %>
+                  <%= link_to 'Criar', new_users_backoffice_address_path, class: "btn btn-success" %>  
+          </tbody>
+        </table>
+      </div>  
+    </div>
+  </div>
+</div>

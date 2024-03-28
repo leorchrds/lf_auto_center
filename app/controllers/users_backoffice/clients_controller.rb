@@ -13,6 +13,7 @@ module UsersBackoffice
     # GET /clients/new
     def new
       @client = Client.new
+      @client.build_address
     end
 
     # GET /clients/1/edit
@@ -59,7 +60,7 @@ module UsersBackoffice
 
     # Only allow a list of trusted parameters through.
     def client_params
-      params.require(:client).permit(:name, :address, :phone, :observation)
+      params.require(:client).permit(:name, :phone, :observation, address_attributes: [:street, :number, :complement, :neighborhood, :city, :state, :postal_code, :country])
     end
   end
 end

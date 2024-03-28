@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: one
+  vehicle: one
+  mileage: 1
+  entry_time: 2024-03-27 20:24:31
+  exit_time: 2024-03-27 20:24:31
+  entry_date: 2024-03-27
+  exit_date: 2024-03-27
+  description: MyText
+
+two:
+  client: two
+  vehicle: two
+  mileage: 1
+  entry_time: 2024-03-27 20:24:31
+  exit_time: 2024-03-27 20:24:31
+  entry_date: 2024-03-27
+  exit_date: 2024-03-27
+  description: MyText
