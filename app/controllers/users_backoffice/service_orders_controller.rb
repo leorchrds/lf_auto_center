@@ -16,32 +16,25 @@ module UsersBackoffice
 
     def create
       @service_order = ServiceOrder.new(service_order_params)
-
       respond_to do |format|
         if @service_order.save
-          format.html { redirect_to users_backoffice_address_path(@service_order), notice: 'Ordem de serviço criada com sucesso.' }
+          format.html do
+            redirect_to users_backoffice_service_order_path(@service_order),
+                        notice: 'Ordem de serviço criada com sucesso.'
+          end
         else
           format.html { render :new, status: :unprocessable_entity }
         end
       end
     end
 
-    def update
-      respond_to do |format|
-        if @service_order.update(address_params)
-          format.html { redirect_to users_backoffice_address_path(@service_order), notice: 'Ordem de serviço atualizada com sucesso.' }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-        end
-      end
-    end
-
-    # DELETE /clients/1 or /clients/1.json
     def destroy
       @service_order.destroy
 
       respond_to do |format|
-        format.html { redirect_to users_backoffice_address_path, notice: 'Ordem de serviço excluída com sucesso.' }
+        format.html do
+          redirect_to users_backoffice_service_orders_path, notice: 'Ordem de serviço excluída com sucesso.'
+        end
       end
     end
 
@@ -51,9 +44,12 @@ module UsersBackoffice
       @service_order = ServiceOrder.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def service_order_params
-      params.require(:address).permit(:street, :number, :complement, :neighborhood, :city, :state, :postal_code, :country, :client_id)
+      params.require(:service_order).permit(
+        :client_id, :vehicle_id, :mileage, :entry_time, :exit_time,
+        :entry_date, :exit_date, :description, address_attributes:
+        %i[street number complement neighborhood city state postal_code country]
+      )
     end
   end
 end

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @service_order.client.name %>
+</p>
+
+<p>
+  <strong>Veiculo:</strong>
+  <%= @service_order.vehicle.brand %>
+  <%= @service_order.vehicle.model %>
+</p>
+
+<p>
+  <strong>Km:</strong>
+  <%= @service_order.mileage %>
+</p>
+
+<p>
+  <strong>Hora de entrada:</strong>
+  <%= @service_order.entry_time %>
+</p>
+
+<p>
+  <strong>Hora de saída:</strong>
+  <%= @service_order.exit_time %>
+</p>
+
+<p>
+  <strong>Data de entrada:</strong>
+  <%= @service_order.entry_date %>
+</p>
+
+<p>
+  <strong>Data de saída:</strong>
+  <%= @service_order.exit_date %>
+</p>
+
+<p>
+  <strong>Descrição do serviço:</strong>
+  <%= @service_order.description %>
+</p>
+

@@ -1,0 +1,120 @@
+<div class="content-wrapper" style="min-height: 502.334px;">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Nova Ordem de Serviço</h3>
+            </div>
+            <%= simple_form_for([:users_backoffice, @service_order], html: { class: "form-horizontal" }) do |f| %>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+              <div class="form-group">
+                  <%= f.label :client, "Cliente" %>
+                  <%= f.association :client, include_blank: false, class: "form-control#{' is-invalid' if f.object.errors[:client].present?}" %>
+                  <% if f.object.errors[:client].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:client].to_sentence %>
+                    </div>
+                  <% end %>
+                
+                  <div class="form-group">
+                  <%= f.label :vehicle, "Veículo" %>
+                  <%= f.association :vehicle, 
+                                  include_blank: false, 
+                                  label_method: :model, 
+                                  value_method: :id, 
+                                  class: "form-control#{' is-invalid' if f.object.errors[:vehicle].present?}" %>
+                  <% if f.object.errors[:vehicle].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:vehicle].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+              <div class="card-body">
+                <div class="form-group row">
+                  <%= f.label :mileage, "Quilometragem do Veículo", class: "col-sm-3 control-label" %>
+                  <div class="col-sm-9">
+                    <%= f.number_field :mileage, class: "form-control#{' is-invalid' if f.object.errors[:mileage].present?}", placeholder: "Quilometragem do Veículo" %>
+                    <% if f.object.errors[:mileage].present? %>
+                      <div class="invalid-feedback">
+                        <%= f.object.errors[:mileage].to_sentence %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <%= f.label :entry_time, "Hora de Entrada", class: "col-sm-3 control-label" %>
+                  <div class="col-sm-9">
+                    <%= f.datetime_field :entry_time, class: "form-control#{' is-invalid' if f.object.errors[:entry_time].present?}" %>
+                    <% if f.object.errors[:entry_time].present? %>
+                      <div class="invalid-feedback">
+                        <%= f.object.errors[:entry_time].to_sentence %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <%= f.label :exit_time, "Hora de Saída", class: "col-sm-3 control-label" %>
+                  <div class="col-sm-9">
+                    <%= f.datetime_field :exit_time, class: "form-control#{' is-invalid' if f.object.errors[:exit_time].present?}" %>
+                    <% if f.object.errors[:exit_time].present? %>
+                      <div class="invalid-feedback">
+                        <%= f.object.errors[:exit_time].to_sentence %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <%= f.label :entry_date, "Data de Entrada", class: "col-sm-3 control-label" %>
+                  <div class="col-sm-9">
+                    <%= f.date_field :entry_date, class: "form-control#{' is-invalid' if f.object.errors[:entry_date].present?}" %>
+                    <% if f.object.errors[:entry_date].present? %>
+                      <div class="invalid-feedback">
+                        <%= f.object.errors[:entry_date].to_sentence %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <%= f.label :exit_date, "Data de Saída", class: "col-sm-3 control-label" %>
+                  <div class="col-sm-9">
+                    <%= f.date_field :exit_date, class: "form-control#{' is-invalid' if f.object.errors[:exit_date].present?}" %>
+                    <% if f.object.errors[:exit_date].present? %>
+                      <div class="invalid-feedback">
+                        <%= f.object.errors[:exit_date].to_sentence %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <%= f.label :description, "Descrição do Serviço", class: "col-sm-3 control-label" %>
+                  <div class="col-sm-9">
+                    <%= f.text_area :description, class: "form-control#{' is-invalid' if f.object.errors[:description].present?}", placeholder: "Descrição do Serviço", rows: 5 %>
+                    <% if f.object.errors[:description].present? %>
+                      <div class="invalid-feedback">
+                        <%= f.object.errors[:description].to_sentence %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <%= f.submit "Salvar", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

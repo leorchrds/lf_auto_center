@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :users_backoffice do
-    get 'service_orders/index'
-  end
   namespace :admins_backoffice do
     get 'welcome/index'
     resources :admins

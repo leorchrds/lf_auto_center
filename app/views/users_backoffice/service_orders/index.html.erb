@@ -1,2 +1,59 @@
-<h1>UsersBackoffice::ServiceOrders#index</h1>
-<p>Find me in app/views/users_backoffice/service_orders/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Ordem de serviço</h3>
+
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Veículo</th>
+              <th>Quilometragem</th>
+              <th>Hora de Entrada</th>
+              <th>Hora de Saída</th>
+              <th>Data de Entrada</th>
+              <th>Descrição do Serviço</th>
+              <th>Data de Saída</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @service_orders.each do |service_order| %>
+            <tr>
+              <td><%= service_order.client.name %></td>
+              <td><%= service_order.vehicle.model %></td>
+              <td><%= service_order.mileage %></td>
+              <td><%= service_order.entry_time.strftime("%d/%m/%Y %H:%M") if service_order.entry_time %></td>
+              <td><%= service_order.exit_time.strftime("%d/%m/%Y %H:%M") if service_order.exit_time %></td>
+              <td><%= service_order.entry_date.strftime("%d/%m/%Y") if service_order.entry_date %></td>
+              <td><%= service_order.description %></td>
+              <td><%= service_order.exit_date.strftime("%d/%m/%Y") if service_order.exit_date %></td>
+              <td>
+                <%= link_to 'Detalhes', users_backoffice_service_order_path(service_order), class:"btn btn-primary" %>
+                <%= link_to 'Editar', edit_users_backoffice_service_order_path(service_order), class:"btn btn-primary" %>
+                <%= link_to 'Excluir', users_backoffice_service_order_path(service_order), method: :delete, class:"btn btn-danger", data: { confirm: 'Deseja realmente excluir este endereço ?'} %>
+              </td>
+            </tr>
+            <% end %>
+            <%= link_to 'Criar', new_users_backoffice_service_order_path, class: "btn btn-success" %>  
+          </tbody>
+        </table>
+      </div>  
+    </div>
+  </div>
+</div>
