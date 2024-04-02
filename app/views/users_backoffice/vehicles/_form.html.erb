@@ -5,7 +5,7 @@
         <div class="col-sm-6">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Novo veículo</h3>
+              <h3 class="card-title">New Vehicle</h3>
             </div>
 
             <%= simple_form_for([:users_backoffice, @vehicle]) do |f| %>
@@ -14,63 +14,33 @@
 
               <div class="card-body">
                 <div class="form-group">
-                  <%= f.label :license_plate, "Placa" %>
-                  <%= f.text_field :license_plate, class: "form-control#{' is-invalid' if f.object.errors[:license_plate].present?}", placeholder: "Placa" %>
-                  <% if f.object.errors[:license_plate].present? %>
-                    <div class="invalid-feedback">
-                      <%= f.object.errors[:license_plate].to_sentence %>
-                    </div>
-                  <% end %>
+                  <%= f.label :license_plate, "License Plate" %>
+                  <%= f.text_field :license_plate, class: "form-control", placeholder: "License Plate" %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :brand, "Marca" %>
-                  <%= f.text_field :brand, class: "form-control#{' is-invalid' if f.object.errors[:brand].present?}", placeholder: "Marca" %>
-                  <% if f.object.errors[:brand].present? %>
-                    <div class="invalid-feedback">
-                      <%= f.object.errors[:brand].to_sentence %>
-                    </div>
-                  <% end %>
+                  <%= f.label :brand, "Brand" %>
+                  <%= f.text_field :brand, class: "form-control", placeholder: "Brand" %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :model, "Modelo" %>
-                  <%= f.text_field :model, class: "form-control#{' is-invalid' if f.object.errors[:model].present?}", placeholder: "Modelo" %>
-                  <% if f.object.errors[:model].present? %>
-                    <div class="invalid-feedback">
-                      <%= f.object.errors[:model].to_sentence %>
-                    </div>
-                  <% end %>
+                  <%= f.label :model, "Model" %>
+                  <%= f.text_field :model, class: "form-control", placeholder: "Model" %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :color, "Cor" %>
-                  <%= f.text_field :color, class: "form-control#{' is-invalid' if f.object.errors[:color].present?}", placeholder: "Cor" %>
-                  <% if f.object.errors[:color].present? %>
-                    <div class="invalid-feedback">
-                      <%= f.object.errors[:color].to_sentence %>
-                    </div>
-                  <% end %>
+                  <%= f.label :color, "Color" %>
+                  <%= f.text_field :color, class: "form-control", placeholder: "Color" %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :client, "Cliente" %>
-                  <%= f.association :client, include_blank: false, class: "form-control#{' is-invalid' if f.object.errors[:client].present?}" %>
-                  <% if f.object.errors[:client].present? %>
-                    <div class="invalid-feedback">
-                      <%= f.object.errors[:client].to_sentence %>
-                    </div>
-                  <% end %>
+                  <%= f.label :year_of_manufacture, "Year of Manufacture" %>
+                  <%= f.text_field :year_of_manufacture, class: "form-control", placeholder: "Year of Manufacture" %>
                 </div>
 
                 <div class="form-group">
-                  <%= f.label :year_of_manufacture, "Ano de fabricação" %>
-                  <%= f.text_field :year_of_manufacture, class: "form-control", placeholder: "Ano de fabricação" %>
-                </div>
-
-                <div class="form-group">
-                  <%= f.label :fuel_type, "Tipo de combustível" %>
-                  <%= f.text_field :fuel_type, class: "form-control", placeholder: "Tipo de combustível" %>
+                  <%= f.label :fuel_type, "Fuel Type" %>
+                  <%= f.text_field :fuel_type, class: "form-control", placeholder: "Fuel Type" %>
                 </div>
               </div>
 

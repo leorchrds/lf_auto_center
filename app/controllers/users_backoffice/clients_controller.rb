@@ -36,7 +36,7 @@ module UsersBackoffice
     def update
       respond_to do |format|
         if @client.update(client_params)
-          format.html { redirect_to users_backoffice_clients_path(@client), notice: 'Cliente atualizado com sucesso.' }
+          format.html { redirect_to users_backoffice_client_path(@client), notice: 'Cliente atualizado com sucesso.' }
         else
           format.html { render :edit, status: :unprocessable_entity }
         end

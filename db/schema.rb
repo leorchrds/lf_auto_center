@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_27_232431) do
+ActiveRecord::Schema.define(version: 2024_04_01_151524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,15 +79,19 @@ ActiveRecord::Schema.define(version: 2024_03_27_232431) do
   end
 
   create_table "vehicles", force: :cascade do |t|
-    t.string "license_plate", null: false
-    t.string "brand", null: false
-    t.string "model", null: false
-    t.bigint "client_id", null: false
-    t.string "color", null: false
+    t.string "license_plate"
+    t.string "brand"
+    t.string "model"
+    t.bigint "client_id"
+    t.string "color"
     t.integer "year_of_manufacture"
     t.string "fuel_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "gear"
+    t.decimal "engine_size", precision: 10, scale: 2
+    t.integer "year_model"
+    t.decimal "avg_price_brl", precision: 10, scale: 2
     t.index ["client_id"], name: "index_vehicles_on_client_id"
   end
 

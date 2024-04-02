@@ -1,6 +1,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script>
   $(document).ready(function() {
+    // Mask and restrict to numbers only in the phone field
+    $('#client_phone').mask('(00) 00000-0000', { placeholder: "(00) 00000-0000" });
+    $('#client_phone').on('input', function() {
+      this.value = this.value.replace(/\D/g,'');
+    });
+
+    // Request to CEP API when leaving the CEP field
     $('#client_address_attributes_postal_code').on('blur', function() {
       var cep = $(this).val().replace(/\D/g, '');
       if (cep.length != 8) {
@@ -27,7 +35,7 @@
         <div class="col-sm-6">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Novo cliente</h3>
+              <h3 class="card-title">New Client</h3>
             </div>
 
             <%= simple_form_for([:users_backoffice, @client]) do |f| %>
@@ -35,7 +43,7 @@
               <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
               <div class="card-body">
                 <div class="form-group">
-                  <%= f.label :name, "Nome" %>
+                  <%= f.label :name, "Name" %>
                   <%= f.text_field :name, class: "form-control#{' is-invalid' if f.object.errors[:name].present?}", placeholder: "Enter name" %>
                   <% if f.object.errors[:name].present? %>
                     <div class="invalid-feedback">
@@ -44,8 +52,8 @@
                   <% end %>
                 </div>
                 <div class="form-group">
-                  <%= f.label :phone, "Telefone" %>
-                  <%= f.text_field :phone, class: "form-control#{' is-invalid' if f.object.errors[:phone].present?}", placeholder: "Telefone" %>
+                  <%= f.label :phone, "Phone" %>
+                  <%= f.text_field :phone, class: "form-control#{' is-invalid' if f.object.errors[:phone].present?}", placeholder: "(00) 00000-0000", id: "client_phone" %>
                   <% if f.object.errors[:phone].present? %>
                     <div class="invalid-feedback">
                       <%= f.object.errors[:phone].to_sentence %>
@@ -53,33 +61,33 @@
                   <% end %>
                 </div>
                 <div class="form-group">
-                  <%= f.label :observation, "Observação" %>
-                  <%= f.text_field :observation, class: "form-control", placeholder: "Observação" %>
+                  <%= f.label :observation, "Observation" %>
+                  <%= f.text_field :observation, class: "form-control", placeholder: "Observation" %>
                 </div>
                 <div class="form-group">
                   <%= f.fields_for :address do |address_fields| %>
-                    <%= address_fields.label :street, "Rua" %>
+                    <%= address_fields.label :street, "Street" %>
                     <%= address_fields.text_field :street, class: "form-control" %>
                     
-                    <%= address_fields.label :number, "Número" %>
+                    <%= address_fields.label :number, "Number" %>
                     <%= address_fields.text_field :number, class: "form-control" %>
                     
-                    <%= address_fields.label :complement, "Complemento" %>
+                    <%= address_fields.label :complement, "Complement" %>
                     <%= address_fields.text_field :complement, class: "form-control" %>
                     
-                    <%= address_fields.label :neighborhood, "Bairro" %>
+                    <%= address_fields.label :neighborhood, "Neighborhood" %>
                     <%= address_fields.text_field :neighborhood, class: "form-control" %>
                     
-                    <%= address_fields.label :city, "Cidade" %>
+                    <%= address_fields.label :city, "City" %>
                     <%= address_fields.text_field :city, class: "form-control" %>
                     
-                    <%= address_fields.label :state, "Estado" %>
+                    <%= address_fields.label :state, "State" %>
                     <%= address_fields.text_field :state, class: "form-control" %>
                     
-                    <%= address_fields.label :postal_code, "CEP" %>
+                    <%= address_fields.label :postal_code, "Postal Code" %>
                     <%= address_fields.text_field :postal_code, class: "form-control" %>
                     
-                    <%= address_fields.label :country, "País" %>
+                    <%= address_fields.label :country, "Country" %>
                     <%= address_fields.text_field :country, class: "form-control" %>
                   <% end %>
                 </div>

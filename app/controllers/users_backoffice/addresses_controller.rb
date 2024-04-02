@@ -41,7 +41,7 @@ module UsersBackoffice
       @address.destroy
 
       respond_to do |format|
-        format.html { redirect_to users_backoffice_address_path, notice: 'Endereço excluído com sucesso.' }
+        format.html { redirect_to users_backoffice_addresses_path, notice: 'Endereço excluído com sucesso.' }
       end
     end
 

@@ -1,0 +1,6 @@
+pt-BR:
+  activerecord:
+    attributes:
+      service_order:
+        client: "Cliente"
+        vehicle: "Veículo"
