@@ -41,8 +41,10 @@
                 </td>
               </tr>
             <% end %>
+            <div class="col-md-6">
                   <%= link_to 'Criar', new_users_backoffice_vehicle_path, class: "btn btn-success" %>
                   <%= paginate @vehicles%>
+            </div>
           </tbody>
         </table>
       </div>  

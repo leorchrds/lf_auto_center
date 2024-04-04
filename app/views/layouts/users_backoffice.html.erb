@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>LfAutoCenter</title>
+  <style>
+    .no-underline { text-decoration: none !important; /* Remove sublinhado */ }
+  </style>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -62,7 +65,7 @@
     <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
 
       <!-- Brand Logo -->
-      <a href="/" class="brand-link">
+      <a href="/" class="brand-link  no-underline">
         <img src="<%= asset_path 'LF_logo.png' %>" alt="LF Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">LF Auto center</span>
       </a>
@@ -74,7 +77,7 @@
           <img src="<%= asset_path 'user2-160x160.jpg' %>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><%= current_user.user_name %></a>
+          <a href="#" class="d-block no-underline"><%= current_user.user_name %></a>
         </div>
       </div>
   

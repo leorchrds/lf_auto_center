@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -24,12 +22,11 @@
             <tr>
               <th>Cliente</th>
               <th>Veículo</th>
-              <th>Quilometragem</th>
-              <th>Hora de Entrada</th>
-              <th>Hora de Saída</th>
-              <th>Data de Entrada</th>
-              <th>Descrição do Serviço</th>
+              <th>Km</th>
+              <th>Data de Entrada</th>  
               <th>Data de Saída</th>
+              <th>Descrição do Serviço</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -38,11 +35,9 @@
               <td><%= service_order.client.name %></td>
               <td><%= service_order.vehicle.model %></td>
               <td><%= service_order.mileage %></td>
-              <td><%= service_order.entry_time.strftime("%d/%m/%Y %H:%M") if service_order.entry_time %></td>
-              <td><%= service_order.exit_time.strftime("%d/%m/%Y %H:%M") if service_order.exit_time %></td>
               <td><%= service_order.entry_date.strftime("%d/%m/%Y") if service_order.entry_date %></td>
-              <td><%= service_order.description %></td>
               <td><%= service_order.exit_date.strftime("%d/%m/%Y") if service_order.exit_date %></td>
+              <td><%= service_order.description %></td>
               <td>
                 <%= link_to 'Detalhes', users_backoffice_service_order_path(service_order), class:"btn btn-primary" %>
                 <%= link_to 'Editar', edit_users_backoffice_service_order_path(service_order), class:"btn btn-primary" %>
@@ -50,10 +45,12 @@
               </td>
             </tr>
             <% end %>
-            <%= link_to 'Criar', new_users_backoffice_service_order_path, class: "btn btn-success" %>  
           </tbody>
         </table>
       </div>  
+      <!-- /.card-body -->
     </div>
+    <!-- /.card -->
+    <%= link_to 'Criar ordem de serviço', new_users_backoffice_service_order_path, class: "btn btn-success" %>
   </div>
 </div>
