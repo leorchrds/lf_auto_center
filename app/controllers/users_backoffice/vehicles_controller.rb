@@ -2,7 +2,7 @@ module UsersBackoffice
   class VehiclesController < BaseController
     before_action :set_vehicle, only: %i[show edit update destroy]
 
-    def index
+  def index
       @vehicles = Vehicle.all.page(params[:page])
     end
 

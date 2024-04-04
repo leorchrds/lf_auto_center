@@ -2,6 +2,7 @@
   "name": "lf_auto_center",
   "private": true,
   "dependencies": {
+    "jquery-ui": "^1.13.2",
     "sinesp-api": "^3.0.0"
   }
 }

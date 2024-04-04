@@ -3,7 +3,16 @@ module UsersBackoffice
     before_action :set_service_order, only: %i[show edit update destroy]
 
     def index
-      @service_orders = ServiceOrder.all
+      if params[:vehicle_brand].present?
+        vehicles = Vehicle.where(brand: params[:vehicle_brand])
+        @service_orders = ServiceOrder.where(vehicle_id: vehicles.pluck(:id))
+      else
+        @service_orders = ServiceOrder.all
+      end
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     def show; end
@@ -15,7 +24,17 @@ module UsersBackoffice
     def edit; end
 
     def create
+          
       @service_order = ServiceOrder.new(service_order_params)
+
+      
+      vehicle_model = params[:vehicle_model] # Modelo selecionado na view
+      vehicle = Vehicle.find_by(model: vehicle_model)
+
+      # Associe o veículo à ordem de serviço, se encontrado
+      @service_order.vehicle = vehicle if vehicle
+
+
       respond_to do |format|
         if @service_order.save
           format.html do
@@ -23,6 +42,7 @@ module UsersBackoffice
                         notice: 'Ordem de serviço criada com sucesso.'
           end
         else
+          puts @service_order.errors.full_messages # Isso irá imprimir os erros no console
           format.html { render :new, status: :unprocessable_entity }
         end
       end
