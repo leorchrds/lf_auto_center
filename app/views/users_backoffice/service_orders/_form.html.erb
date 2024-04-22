@@ -14,15 +14,7 @@
                 <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
                   
                 <div class="card-body">
-                  <div class="form-group row">
-                    <div class="col-sm-3">
-                      <%= label_tag :vehicle_model_filter, "Filtrar modelos de veículos:", class: "control-label text-right" %>
-                    </div>
-                    <div class="col-sm-9">
-                      <%= text_field_tag :vehicle_model_filter, params[:vehicle_model_filter], class: "form-control", id: "vehicle_model_filter", placeholder: "Digite para filtrar os modelos de veículos" %>
-                    </div>
-                  </div>
-
+         
                   <div class="form-group row">
                     <div class="col-sm-3">
                       <%= label_tag :vehicle_model, "Modelo do veículo:", class: "control-label text-right" %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_19_180207) do
+ActiveRecord::Schema.define(version: 2024_04_22_190305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,20 +42,22 @@ ActiveRecord::Schema.define(version: 2024_04_19_180207) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "budgets", force: :cascade do |t|
-    t.date "date"
+  create_table "budget_line_items", force: :cascade do |t|
+    t.bigint "budget_id"
+    t.string "service_name"
     t.integer "quantity"
-    t.decimal "service_value"
-    t.boolean "approval"
-    t.text "observations"
-    t.bigint "client_id"
-    t.bigint "vehicle_id"
+    t.decimal "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "service_id"
+    t.index ["budget_id"], name: "index_budget_line_items_on_budget_id"
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.bigint "client_id"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_budgets_on_client_id"
-    t.index ["service_id"], name: "index_budgets_on_service_id"
-    t.index ["vehicle_id"], name: "index_budgets_on_vehicle_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -79,15 +81,6 @@ ActiveRecord::Schema.define(version: 2024_04_19_180207) do
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_service_orders_on_client_id"
     t.index ["vehicle_id"], name: "index_service_orders_on_vehicle_id"
-  end
-
-  create_table "services", force: :cascade do |t|
-    t.string "name"
-    t.integer "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "budget_id"
-    t.index ["budget_id"], name: "index_services_on_budget_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -121,11 +114,9 @@ ActiveRecord::Schema.define(version: 2024_04_19_180207) do
   end
 
   add_foreign_key "addresses", "clients"
+  add_foreign_key "budget_line_items", "budgets"
   add_foreign_key "budgets", "clients"
-  add_foreign_key "budgets", "services"
-  add_foreign_key "budgets", "vehicles"
   add_foreign_key "service_orders", "clients"
   add_foreign_key "service_orders", "vehicles"
-  add_foreign_key "services", "budgets"
   add_foreign_key "vehicles", "clients"
 end

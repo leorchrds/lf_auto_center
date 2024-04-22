@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :vehicles
     resources :addresses
     resources :service_orders
+    resources :budgets
   end
 
   root to: 'users_backoffice/welcome#index'

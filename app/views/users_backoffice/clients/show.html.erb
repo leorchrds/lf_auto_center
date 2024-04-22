@@ -10,14 +10,11 @@
     <strong>Endereço:</strong>
     <%= @client.address.street %>,
     <%= @client.address.number %>,
-    <%= @client.address.complement %> <%# Se você quiser exibir apenas se o complemento estiver presente, adicione uma verificação de presença aqui %>
     <%= @client.address.neighborhood %>,
     <%= @client.address.city %> - <%= @client.address.state %>,
     <%= @client.address.postal_code %>,
-    <%= @client.address.country %>
   </p>
 <% end %>
-
 
 <p>
   <strong>Telefone:</strong>
