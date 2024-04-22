@@ -9,34 +9,61 @@
             </div>
 
             <%= simple_form_for([:users_backoffice, @vehicle]) do |f| %>
-              <%= f.error_notification %>
-              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
               <div class="card-body">    
-
                 <div class="form-group">
                   <%= f.label :client_id, "Cliente" %>
-                  <%= f.collection_select :client_id, Client.all, :id, :name, { prompt: "Selecione um cliente" }, class: "form-control" %>
+                  <%= f.collection_select :client_id, Client.all, :id, :name, { prompt: "Selecione um cliente" }, class: "form-control#{' is-invalid' if f.object.errors[:client_id].present?}" %>
+
+                  <% if f.object.errors[:client_id].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:client_id].to_sentence %>
+                    </div>
+                  <% end %>
                 </div>
 
                 <div class="form-group">
                   <%= f.label :license_plate, "Placa" %>
-                  <%= f.text_field :license_plate, class: "form-control", placeholder: "Placa" %>
+                  <%= f.text_field :license_plate, class: "form-control#{' is-invalid' if f.object.errors[:license_plate].present?}", placeholder: "Placa" %>
+                  
+                  <% if f.object.errors[:license_plate].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:license_plate].to_sentence %>
+                    </div>
+                  <% end %>
                 </div>
 
                 <div class="form-group">
                   <%= f.label :brand, "Marca" %>
-                  <%= f.text_field :brand, class: "form-control", placeholder: "Marca" %>
+                  <%= f.text_field :brand, class: "form-control#{' is-invalid' if f.object.errors[:brand].present?}", placeholder: "Marca" %>
+
+                  <% if f.object.errors[:brand].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:brand].to_sentence %>
+                    </div>
+                  <% end %>
                 </div>
 
                 <div class="form-group">
                   <%= f.label :model, "Modelo" %>
-                  <%= f.text_field :model, class: "form-control", placeholder: "Modelo" %>
+                  <%= f.text_field :model, class: "form-control#{' is-invalid' if f.object.errors[:model].present?}", placeholder: "Modelo" %>
+
+                  <% if f.object.errors[:model].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:model].to_sentence %>
+                    </div>
+                  <% end %>
                 </div>
 
                 <div class="form-group">
                   <%= f.label :color, "Cor" %>
-                  <%= f.text_field :color, class: "form-control", placeholder: "Cor" %>
+                  <%= f.text_field :color, class: "form-control#{' is-invalid' if f.object.errors[:color].present?}", placeholder: "Cor" %>
+
+                  <% if f.object.errors[:color].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:color].to_sentence %>
+                    </div>
+                  <% end %>
                 </div>
 
                 <div class="form-group">

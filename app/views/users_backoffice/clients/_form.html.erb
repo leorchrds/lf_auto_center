@@ -1,33 +1,3 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-<script>
-  $(document).ready(function() {
-    // Mask and restrict to numbers only in the phone field
-    $('#client_phone').mask('(00) 00000-0000', { placeholder: "(00) 00000-0000" });
-    $('#client_phone').on('input', function() {
-      this.value = this.value.replace(/\D/g,'');
-    });
-
-    // Request to CEP API when leaving the CEP field
-    $('#client_address_attributes_postal_code').on('blur', function() {
-      var cep = $(this).val().replace(/\D/g, '');
-      if (cep.length != 8) {
-        return;
-      }
-      
-      $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
-        if (!("erro" in data)) {
-          $('#client_address_attributes_street').val(data.logradouro);
-          $('#client_address_attributes_neighborhood').val(data.bairro);
-          $('#client_address_attributes_city').val(data.localidade);
-          $('#client_address_attributes_state').val(data.uf);
-          $('#client_address_attributes_country').val('Brasil');
-        }
-      });
-    });
-  });
-</script>
-
 <div class="content-wrapper" style="min-height: 502.334px;">
   <div class="content-header">
     <div class="container-fluid">
@@ -42,6 +12,7 @@
               <%= f.error_notification %>
               <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
               <div class="card-body">
+
                 <div class="form-group">
                   <%= f.label :name, "Nome" %>
                   <%= f.text_field :name, class: "form-control#{' is-invalid' if f.object.errors[:name].present?}", placeholder: "Nome do cliente" %>
@@ -51,6 +22,7 @@
                     </div>
                   <% end %>
                 </div>
+
                 <div class="form-group">
                   <%= f.label :phone, "Telefone" %>
                   <%= f.text_field :phone, class: "form-control#{' is-invalid' if f.object.errors[:phone].present?}", placeholder: "(00) 00000-0000", id: "client_phone" %>
@@ -60,10 +32,12 @@
                     </div>
                   <% end %>
                 </div>
+
                 <div class="form-group">
                   <%= f.label :observation, "Observação" %>
                   <%= f.text_field :observation, class: "form-control", placeholder: "Observação" %>
                 </div>
+                
                 <div class="form-group">
                   <%= f.fields_for :address do |address_fields| %>
                     <%= address_fields.label :street, "Rua" %>
@@ -103,3 +77,33 @@
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Mask and restrict to numbers only in the phone field
+    $('#client_phone').mask('(00) 00000-0000', { placeholder: "(00) 00000-0000" });
+    $('#client_phone').on('input', function() {
+      this.value = this.value.replace(/\D/g,'');
+    });
+
+    // Request to CEP API when leaving the CEP field
+    $('#client_address_attributes_postal_code').on('blur', function() {
+      var cep = $(this).val().replace(/\D/g, '');
+      if (cep.length != 8) {
+        return;
+      }
+      
+      $.getJSON('https://viacep.com.br/ws/' + cep + '/json/', function(data) {
+        if (!("erro" in data)) {
+          $('#client_address_attributes_street').val(data.logradouro);
+          $('#client_address_attributes_neighborhood').val(data.bairro);
+          $('#client_address_attributes_city').val(data.localidade);
+          $('#client_address_attributes_state').val(data.uf);
+          $('#client_address_attributes_country').val('Brasil');
+        }
+      });
+    });
+  });
+</script>

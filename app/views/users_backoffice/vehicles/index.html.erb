@@ -25,15 +25,17 @@
             <tr>       
               <th>Marca</th>
               <th>Modelo</th>
-              <th>Combustível</th>
+              <th>Cor</th>
+              <th>Propietário</th>
             </tr>
           </thead>
           <tbody>
             <% @vehicles.each do |vehicle| %>
               <tr>
-                <td><%= vehicle.brand %></td>
-                <td><%= vehicle.model %></td>
-                <td><%= vehicle.fuel_type %></td>
+                <td><%= vehicle.brand.upcase %></td>
+                <td><%= vehicle.model.upcase %></td>
+                <td><%= vehicle.color.upcase %></td>
+                <td><%= vehicle.client.name.upcase %></td>
                 <td>
                   <%= link_to 'Detalhes', users_backoffice_vehicle_path(vehicle), class:"btn btn-primary" %>
                   <%= link_to 'Editar', edit_users_backoffice_vehicle_path(vehicle), class:"btn btn-primary" %>
@@ -41,12 +43,13 @@
                 </td>
               </tr>
             <% end %>
-            <div class="col-md-6">
-                  <%= link_to 'Criar', new_users_backoffice_vehicle_path, class: "btn btn-success" %>
-                  <%= paginate @vehicles%>
-            </div>
           </tbody>
         </table>
+        </div>
+        <div>
+          <!-- /.card -->
+          <%= link_to 'Criar novo Veiculo', new_users_backoffice_vehicle_path, class: "btn btn-success" %>  
+        </div> 
       </div>  
     </div>
   </div>

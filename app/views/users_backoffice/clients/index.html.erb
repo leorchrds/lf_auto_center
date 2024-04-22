@@ -25,15 +25,21 @@
             <tr>
               <th>Nome</th>
               <th>Telefone</th>
+              <th>Veiculo</th>
               <th>Observações</th>
             </tr>
           </thead>
           <tbody>
             <% @clients.each do |client| %>
               <tr>
-                <td><%= client.name %></td>
-                <td><%= client.phone %></td>
-                <td><%= client.observation %></td> 
+                <td><%= client.name.upcase %></td>
+                <td><%= client.phone.upcase %></td>
+                <td>
+                  <% client.vehicles.each do |vehicle| %>
+                    <%= "#{vehicle.brand.upcase} #{vehicle.model.upcase} (#{vehicle.color.upcase})" %><br>
+                  <% end %>
+                </td> 
+                <td><%= client.observation.upcase %></td> 
                 <td>
                   <%= link_to 'Detalhes', users_backoffice_client_path(client), class:"btn btn-primary" %>
                   <%= link_to 'Editar', edit_users_backoffice_client_path(client), class:"btn btn-primary" %>
