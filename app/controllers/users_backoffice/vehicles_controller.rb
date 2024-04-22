@@ -2,19 +2,17 @@ module UsersBackoffice
   class VehiclesController < BaseController
     before_action :set_vehicle, only: %i[show edit update destroy]
 
-  def index
+    def index
       @vehicles = Vehicle.all.page(params[:page])
     end
 
-    def edit
-    end
+    def edit; end
 
     def new
       @vehicle = Vehicle.new
     end
 
-    def show
-    end
+    def show; end
 
     def create
       @vehicle = Vehicle.new(vehicle_params)
@@ -23,6 +21,7 @@ module UsersBackoffice
         if @vehicle.save
           format.html { redirect_to users_backoffice_vehicles_path, notice: 'Veículo criado com sucesso.' }
         else
+          puts @vehicle.errors.full_messages
           format.html { render :new, status: :unprocessable_entity }
         end
       end
@@ -53,7 +52,8 @@ module UsersBackoffice
     end
 
     def vehicle_params
-      params.require(:vehicle).permit(:license_plate, :brand, :model, :color, :year_of_manufacture, :fuel_type, :gear, :engine_size, :year_model, :avg_price_brl)
+      params.require(:vehicle).permit(:license_plate, :client_id, :brand, :model, :color, :year_of_manufacture,
+                                      :fuel_type, :gear, :engine_size, :year_model, :avg_price_brl)
     end
   end
 end

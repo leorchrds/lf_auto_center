@@ -1,5 +1,6 @@
 class Vehicle < ApplicationRecord
-  #belongs_to :sevice_ordes
+  validates :license_plate, :brand, :model, :client_id, :color, presence: true
+
+  belongs_to :client
   has_many :service_orders
-  #validates :license_plate, :brand, :model, :color, presence: true
 end

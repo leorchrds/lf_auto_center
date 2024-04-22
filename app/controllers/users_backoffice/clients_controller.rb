@@ -2,24 +2,19 @@ module UsersBackoffice
   class ClientsController < BaseController
     before_action :set_client, only: %i[show edit update destroy]
 
-    # GET /clients or /clients.json
     def index
       @clients = Client.all
     end
 
-    # GET /clients/1 or /clients/1.json
     def show; end
 
-    # GET /clients/new
     def new
       @client = Client.new
       @client.build_address
     end
 
-    # GET /clients/1/edit
     def edit; end
 
-    # POST /clients or /clients.json
     def create
       @client = Client.new(client_params)
 
@@ -32,7 +27,6 @@ module UsersBackoffice
       end
     end
 
-    # PATCH/PUT /clients/1 or /clients/1.json
     def update
       respond_to do |format|
         if @client.update(client_params)
@@ -43,7 +37,6 @@ module UsersBackoffice
       end
     end
 
-    # DELETE /clients/1 or /clients/1.json
     def destroy
       @client.destroy
 
@@ -58,7 +51,6 @@ module UsersBackoffice
       @client = Client.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def client_params
       params.require(:client).permit(:name, :phone, :observation, address_attributes: [:street, :number, :complement, :neighborhood, :city, :state, :postal_code, :country])
     end
