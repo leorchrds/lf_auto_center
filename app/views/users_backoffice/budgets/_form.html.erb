@@ -1,0 +1,121 @@
+<div class="content-wrapper" style="min-height: 502.334px;">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Novo Orçamento</h3>
+            </div>
+
+            <%= simple_form_for([:users_backoffice, @budget]) do |f| %>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+              <div class="card-body">
+                <div class="form-group">
+                  <%= f.label :client_id, "Cliente" %>
+                  <%= f.collection_select :client_id, Client.all, :id, :name, { prompt: "Selecione um cliente" }, class: "form-control#{' is-invalid' if f.object.errors[:client_id].present?}" %>
+                  <% if f.object.errors[:client_id].present? %>
+                    <div class="invalid-feedback">
+                      <%= f.object.errors[:client_id].to_sentence %>
+                    </div>
+                  <% end %>
+                </div>
+
+                <!-- Adicionar campos dinâmicos para serviços, quantidades e valores -->
+               <div id="items-container">
+              <%= f.simple_fields_for :budget_line_items do |budget_line_item_fields| %>
+                <div class="item">
+                  <div class="form-group">
+                    <%= budget_line_item_fields.label :service_name, "Serviço" %>
+                    <%= budget_line_item_fields.text_field :service_name, class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= budget_line_item_fields.label :quantity, "Quantidade" %>
+                    <%= budget_line_item_fields.number_field :quantity, class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                    <%= budget_line_item_fields.label :unit_price, "Preço Unitário" %>
+                    <%= budget_line_item_fields.number_field :unit_price, class: "form-control" %>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+
+
+                <button type="button" id="add-item-btn" class="btn btn-primary">Adicionar Item</button>
+
+                <div id="total-container">
+                  <strong>Total: <span id="total-value">0.00</span></strong>
+                </div>
+              </div>
+              
+              <div class="card-footer">
+                <%= f.submit "Salvar", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+   document.addEventListener("DOMContentLoaded", function() {
+  var addItemBtn = document.getElementById("add-item-btn");
+
+  addItemBtn.addEventListener("click", function() {
+    var itemsContainer = document.getElementById("items-container");
+    var newItem = document.createElement("div");
+    newItem.classList.add("item");
+    newItem.innerHTML = `
+      <div class="form-group">
+        <label for="budget_line_items_attributes_${itemsContainer.children.length}_service_name">Serviço</label>
+        <input type="text" name="budget[budget_line_items_attributes][${itemsContainer.children.length}][service_name]" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="budget_line_items_attributes_${itemsContainer.children.length}_quantity">Quantidade</label>
+        <input type="number" name="budget[budget_line_items_attributes][${itemsContainer.children.length}][quantity]" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="budget_line_items_attributes_${itemsContainer.children.length}_unit_price">Preço Unitário</label>
+        <input type="number" name="budget[budget_line_items_attributes][${itemsContainer.children.length}][unit_price]" class="form-control">
+      </div>
+    `;
+    itemsContainer.appendChild(newItem);
+
+    // Recalcula o total ao adicionar um novo item
+    calculateTotal();
+  });
+
+  // Recalcula o total sempre que houver uma mudança nos campos de quantidade ou preço unitário dos itens existentes
+  document.addEventListener("input", function(event) {
+    if (event.target.matches("[name^='budget[budget_line_items_attributes]']")) {
+      calculateTotal();
+    }
+  });
+  
+  // Função para calcular o total dos itens
+  function calculateTotal() {
+    var totalValue = 0;
+    var itemContainers = document.querySelectorAll(".item");
+    
+    itemContainers.forEach(function(itemContainer) {
+      var quantityInput = itemContainer.querySelector("[name$='[quantity]']");
+      var unitPriceInput = itemContainer.querySelector("[name$='[unit_price]']");
+      
+      var quantity = parseInt(quantityInput.value);
+      var unitPrice = parseFloat(unitPriceInput.value);
+      
+      if (!isNaN(quantity) && !isNaN(unitPrice)) {
+        totalValue += quantity * unitPrice;
+      }
+    });
+    
+    document.getElementById("total-value").textContent = totalValue.toFixed(2);
+  }
+});
+
+  </script>
+

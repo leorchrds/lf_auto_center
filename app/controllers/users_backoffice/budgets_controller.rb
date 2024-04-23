@@ -1,9 +1,9 @@
 module UsersBackoffice
-  class BudgetController < BaseController
+  class BudgetsController < BaseController
     before_action :set_budget, only: %i[show edit update destroy]
 
     def index
-      @budgets = Budget.all
+      @budgets = Budget.all.includes(:budget_line_items).all
     end
 
     def show; end
@@ -51,7 +51,7 @@ module UsersBackoffice
     end
 
     def budget_params
-      params.require(:budget).permit(:client_id, :total)
+      params.require(:budget).permit(:client_id, :total, budget_line_items_attributes: [:id, :service_name, :quantity, :unit_price])
     end
   end
 end
