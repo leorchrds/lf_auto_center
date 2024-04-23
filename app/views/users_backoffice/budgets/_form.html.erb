@@ -23,7 +23,7 @@
                 </div>
 
                 <!-- Adicionar campos dinâmicos para serviços, quantidades e valores -->
-               <div id="items-container">
+              <div id="items-container">
               <%= f.simple_fields_for :budget_line_items do |budget_line_item_fields| %>
                 <div class="item">
                   <div class="form-group">
@@ -61,7 +61,7 @@
   </div>
 </div>
 
-  <script>
+<script>
    document.addEventListener("DOMContentLoaded", function() {
   var addItemBtn = document.getElementById("add-item-btn");
 
@@ -116,6 +116,5 @@
     document.getElementById("total-value").textContent = totalValue.toFixed(2);
   }
 });
-
-  </script>
+</script>
 

@@ -7,9 +7,19 @@
   </style>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> 
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'adminlte/dist/js/adminlte.min.js' %>
+
+  <!-- Fonte do Google: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- AdminLTE CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.1.0/css/adminlte.min.css">
+</head>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -89,7 +99,7 @@
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon fa-solid fas fa-car"></i>
                 <p>
                   Veiculos
                   <i class="right fas fa-angle-left"></i>
@@ -98,13 +108,11 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<%= new_users_backoffice_vehicle_path %>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
                     <p>Cadastrar Veiculos</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<%= users_backoffice_vehicles_path %>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
                     <p>Consultar Veiculos</p>
                   </a>
                 </li>
@@ -112,47 +120,65 @@
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Ordem de serviço
-                  <i class="right fas fa-angle-left"></i>
-                </p>
+                <i class="nav-icon fa-solid fas fa-clipboard-list align-middle"></i>
+                <p class="align-middle">Ordem de serviço <i class="right fas fa-angle-left"></i></p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<%= new_users_backoffice_service_order_path %>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
                     <p>Cadastrar</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<%= users_backoffice_service_orders_path %>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
                     <p>Consultar</p>
                   </a>
                 </li>
               </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Clientes</p>
-                </a>
-                <ul class="nav nav-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-solid fa-users"></i>
+                <p>
+                  Clientes
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="<%= new_users_backoffice_client_path %>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
                     <p>Cadastrar clientes</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<%= users_backoffice_clients_path %>" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
                     <p>Consultar clientes</p>
                   </a>
                 </li>
               </ul>
-              </li>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Orçamentos
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<%= new_users_backoffice_budget_path %>" class="nav-link">
+                    <p>Cadastrar Orçamentos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<%= users_backoffice_budgets_path %>" class="nav-link">
+                    <p>Consultar Orçamentos</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+           
           </ul>
         </nav>
       </div>
