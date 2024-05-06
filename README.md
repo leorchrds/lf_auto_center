@@ -6,9 +6,10 @@ Este projeto está em constante desenvolvimento, com novos recursos sendo adicio
 
 ## Funcionalidades Atuais
 
-- Cadastro de clientes e veículos
+- Cadastro e controle de clientes e veículos
 - Geração de ordens de serviço
 - Controle de serviços
+- controle de orçamentos
 
 ## Uso Particular
 
