@@ -10,7 +10,8 @@ Este projeto está em constante desenvolvimento, com novos recursos sendo adicio
 - Geração de ordens de serviço
 - Controle de serviços
 - controle de orçamentos
-
+##
+https://github.com/leorchrds/lf_auto_center/assets/122051228/9b8ae774-e165-41d8-96a9-a6b3df56490b
 ## Uso Particular
 
 O LF Auto Center foi desenvolvido para atender às necessidades específicas da nossa oficina mecânica. Embora estejamos compartilhando o código fonte publicamente, é importante observar que algumas características ou personalizações podem refletir as particularidades do nosso ambiente de trabalho. No entanto, encorajamos outros proprietários de oficinas a explorar e adaptar o sistema às suas próprias necessidades.
@@ -20,7 +21,6 @@ O LF Auto Center foi desenvolvido para atender às necessidades específicas da 
 Nós valorizamos muito a contribuição da comunidade para o projeto LF Auto Center. Se você tiver ideias para melhorias, encontrar bugs ou quiser colaborar de qualquer forma, fique à vontade para abrir uma issue ou enviar um pull request.
 
 
-https://github.com/leorchrds/lf_auto_center/assets/122051228/9b8ae774-e165-41d8-96a9-a6b3df56490b
 
 
 ## Tecnologias utilizadas
