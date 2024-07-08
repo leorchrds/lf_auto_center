@@ -25,3 +25,31 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore database configuration
+/config/database.yml
+
+# Ignore credentials file for Rails 5.2+.
+/config/credentials.yml.enc
+
+# Ignore secrets file (if applicable)
+/config/secrets.yml
+
+# Ignore IDEs and editors
+/.idea
+*.swp
+*~
+.project
+.idea
+.vscode
+.DS_Store
+
+# Ignore Rubocop cache
+.rubocop-http-*
+
+# Ignore Spring files
+spring/*.pid
+
+# Ignore dotenv files
+.env
+.env.*
