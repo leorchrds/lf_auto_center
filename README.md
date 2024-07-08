@@ -19,6 +19,10 @@ O LF Auto Center foi desenvolvido para atender às necessidades específicas da 
 
 Nós valorizamos muito a contribuição da comunidade para o projeto LF Auto Center. Se você tiver ideias para melhorias, encontrar bugs ou quiser colaborar de qualquer forma, fique à vontade para abrir uma issue ou enviar um pull request.
 
+
+https://github.com/leorchrds/lf_auto_center/assets/122051228/9b8ae774-e165-41d8-96a9-a6b3df56490b
+
+
 ## Tecnologias utilizadas
 - [Ruby](https://www.ruby-lang.org/pt/) (2.5.0)
 - [Rails](https://rubyonrails.org/) (5.2.8.1)
