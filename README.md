@@ -28,7 +28,12 @@ Nós valorizamos muito a contribuição da comunidade para o projeto LF Auto Cen
 - [Devise](https://github.com/heartcombo/devise) para autenticação
 - [Rails-I18n](https://github.com/svenfuchs/rails-i18n) para internacionalização
 - [Kaminari](https://github.com/kaminari/kaminari) para paginação
-- 
+- [Bootstrap](https://github.com/twbs/bootstrap-rubygem) para estilos front-end
+- [HTTParty](https://github.com/jnunemaker/httparty) para requisições HTTP
+- [Simple Form](https://github.com/heartcombo/simple_form) para formulários simplificados
+- [RSpec Rails](https://github.com/rspec/rspec-rails) para testes
+- [Faker](https://github.com/faker-ruby/faker) para geração de dados fictícios
+
 ## Instruções para uso
 Clone o projeto em sua máquina e instale as dependências do projeto com os comandos:
 ```bash
