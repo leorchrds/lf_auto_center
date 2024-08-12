@@ -22,26 +22,30 @@
             <tr>
               <th>Cliente</th>
               <th>Veículo</th>
-              <th>Km</th>
+              <th>Placa</th>
               <th>Data de Entrada</th>  
               <th>Data de Saída</th>
               <th>Descrição do Serviço</th>
+              <th>Valor do Serviço</th>
+              <th>Forma de pagamento</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             <% @service_orders.each do |service_order| %>
             <tr>
-              <td><%= service_order.client.name %></td>
-              <td><%= service_order.vehicle.model %></td>
-              <td><%= service_order.mileage %></td>
+              <td><%= service_order.client.name.upcase %></td>
+              <td><%= "#{service_order.vehicle.brand.upcase}-#{service_order.vehicle.model.upcase}" %></td>
+              <td><%= "#{service_order.vehicle.license_plate.upcase}" %></td>
               <td><%= service_order.entry_date.strftime("%d/%m/%Y") if service_order.entry_date %></td>
               <td><%= service_order.exit_date.strftime("%d/%m/%Y") if service_order.exit_date %></td>
               <td><%= service_order.description %></td>
+              <td><%= number_to_currency(service_order.service_value, unit: "R$", separator: ",", delimiter: ".") %></td>
+              <td><%= service_order.payment_method %></td>
               <td>
                 <%= link_to 'Detalhes', users_backoffice_service_order_path(service_order), class:"btn btn-primary" %>
                 <%= link_to 'Editar', edit_users_backoffice_service_order_path(service_order), class:"btn btn-primary" %>
-                <%= link_to 'Excluir', users_backoffice_service_order_path(service_order), method: :delete, class:"btn btn-danger", data: { confirm: 'Deseja realmente excluir este endereço ?'} %>
+                <%= link_to 'Excluir', users_backoffice_service_order_path(service_order), method: :delete, class:"btn btn-danger", data: { confirm: 'Deseja realmente excluir esta ordem de serviço?' } %>
               </td>
             </tr>
             <% end %>

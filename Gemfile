@@ -44,7 +44,8 @@ gem 'rails-i18n', '~> 5.1'
 gem 'simple_form'
 gem 'tty-spinner'
 gem 'httparty'
-
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 
 group :development, :test do

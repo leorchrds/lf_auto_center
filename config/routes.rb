@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  
   namespace :admins_backoffice do
     get 'welcome/index'
     resources :admins
@@ -8,10 +8,18 @@ Rails.application.routes.draw do
   namespace :users_backoffice do
     resources :users
     resources :clients
-    resources :vehicles
+    resources :vehicles, only: [:index, :edit, :show, :new, :create] do
+      collection do
+        get 'by_cliente', to: 'vehicles#by_cliente'
+      end
+    end
     resources :addresses
     resources :service_orders
-    resources :budgets
+    resources :budgets do
+      member do
+        get :generate_pdf
+      end
+    end
   end
 
   root to: 'users_backoffice/welcome#index'

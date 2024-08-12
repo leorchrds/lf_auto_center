@@ -2,6 +2,7 @@ module UsersBackoffice
   class VehiclesController < BaseController
     before_action :set_vehicle, only: %i[show edit update destroy]
 
+
     def index
       @vehicles = Vehicle.all.page(params[:page])
     end
@@ -13,6 +14,11 @@ module UsersBackoffice
     end
 
     def show; end
+
+    def by_cliente
+      @vehicles = Vehicle.where(client_id: params[:client_id])
+      render json: @vehicles
+    end
 
     def create
       @vehicle = Vehicle.new(vehicle_params)

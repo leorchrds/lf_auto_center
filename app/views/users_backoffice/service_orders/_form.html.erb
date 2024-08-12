@@ -9,37 +9,43 @@
                 <h3 class="card-title">Nova Ordem de Serviço</h3>
               </div>
 
-              <%= simple_form_for([:users_backoffice, @service_order], html: { class: "form-horizontal"  }) do |f| %>
+              <%= simple_form_for([:users_backoffice, @service_order], html: { class: "form-horizontal" }) do |f| %>
                 <%= f.error_notification %>
                 <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
                   
                 <div class="card-body">
-         
-                  <div class="form-group row">
-                    <div class="col-sm-3">
-                      <%= label_tag :vehicle_model, "Modelo do veículo:", class: "control-label text-right" %>
-                    </div>
-                    <div class="col-sm-9">
-                      <%= select_tag :vehicle_model, options_for_select(Vehicle.pluck(:model).uniq.sort, params[:vehicle_model]), include_blank: true, class: "form-control", id: "vehicle_model_select" %>
-                    </div>
-                  </div>
-
                   <div class="form-group row">
                     <div class="col-sm-3">
                       <%= label_tag :client, "Selecione o cliente:", class: "control-label text-right" %>
                     </div>
-                    <div class="col-sm-9">
-                      <%= f.association :client, label: false, include_blank: false, class: "form-control#{' is-invalid' if f.object.errors[:client].present?}" %>
-                      <% if f.object.errors[:client].present? %>
-                        <div class="invalid-feedback">
-                          <%= f.object.errors[:client].to_sentence %>
-                        </div>
+                    <div class="col-sm-6">
+                          <%= f.association :client, label: false, include_blank: false, class: "form-control#{' is-invalid' if f.object.errors[:client].present?}", id: "client_select" %>                      <% if f.object.errors[:client].present? %>
+                          <div class="invalid-feedback">
+                              <%= f.object.errors[:client].to_sentence %>
+                          </div>
+                      <% end %>
+                    </div>
+                    <div class="col-sm-3">
+                      <%= link_to new_users_backoffice_client_path, class: "btn btn-info" do %>
+                        <i class="fas fa-plus"></i> Cliente
                       <% end %>
                     </div>
                   </div>
-                  
 
-                <div class="card-body">
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                      <%= label_tag :vehicle_model, "Modelo do veículo:", class: "control-label text-right" %>
+                    </div>
+                    <div class="col-sm-6">
+                      <%= f.select :vehicle_id, [], { prompt: "Selecione um veículo" }, class: "form-control", id: "vehicle_select" %>
+                    </div>
+                    <div class="col-sm-3"> 
+                      <%= link_to new_users_backoffice_vehicle_path, class: "btn btn-info" do %>
+                        <i class="fas fa-plus"></i> Veículo
+                      <% end %>
+                    </div>
+                  </div>
+
                   <div class="form-group row">
                     <%= f.label :mileage, "Quilometragem do Veículo", class: "col-sm-3 control-label" %>
                     <div class="col-sm-9">
@@ -51,7 +57,6 @@
                       <% end %>
                     </div>
                   </div>
-
 
                   <div class="form-group row">
                     <%= f.label :entry_date, "Data de Entrada", class: "col-sm-3 control-label" %>
@@ -88,13 +93,37 @@
                       <% end %>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div class="card-footer">
-                <%= f.submit "Salvar", class: "btn btn-primary" %>
-              </div>
-            <% end %>
+                  <div class="form-group row">
+                    <%= f.label :service_value, "Valor do Serviço", class: "col-sm-3 control-label" %>
+                    <div class="col-sm-9">
+                      <%= f.number_field :service_value, step: :any, class: "form-control#{' is-invalid' if f.object.errors[:service_value].present?}", placeholder: "Valor do Serviço" %>
+                      <% if f.object.errors[:service_value].present? %>
+                        <div class="invalid-feedback">
+                          <%= f.object.errors[:service_value].to_sentence %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <%= f.label :payment_method, "Forma de Pagamento", class: "col-sm-3 control-label" %>
+                    <div class="col-sm-9">
+                      <%= f.select :payment_method, options_for_select(['Pix', 'Cartão de Crédito', 'Débito', 'Dinheiro'], include_blank: true), {}, class: "form-control#{' is-invalid' if f.object.errors[:payment_method].present?}" %>
+                      <% if f.object.errors[:payment_method].present? %>
+                        <div class="invalid-feedback">
+                          <%= f.object.errors[:payment_method].to_sentence %>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class="card-footer">
+                    <%= f.submit "Salvar", class: "btn btn-primary" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
@@ -104,26 +133,46 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const vehicleModelFilter = document.getElementById('vehicle_model_filter');
-    const vehicleModelSelect = document.getElementById('vehicle_model_select');
-    const allOptions = Array.from(vehicleModelSelect.options); // Armazena todas as opções inicialmente
+  const clientSelect = document.getElementById('service_order_client_id');
+  const vehicleSelect = document.getElementById('vehicle_select');
 
-    function filterOptions() {
-      const filterValue = vehicleModelFilter.value.trim().toLowerCase(); // Removemos espaços em branco extras e colocamos em minúsculas
-      vehicleModelSelect.innerHTML = ''; // Limpa as opções atuais
+  if (!clientSelect) {
+    console.error('Elemento com ID "client_select" não encontrado.');
+    return;
+  }
+  
+  if (!vehicleSelect) {
+    console.error('Elemento com ID "vehicle_select" não encontrado.');
+    return;
+  }
 
-      // Filtra e adiciona as opções correspondentes
-      allOptions.forEach(function(option) {
-        if (option.value.trim().toLowerCase().includes(filterValue) || filterValue === '') { // Verifica se o valor da opção inclui o filtro ou se o filtro está vazio
-          vehicleModelSelect.appendChild(option.cloneNode(true));
-        }
-      });
+  clientSelect.addEventListener('change', function() {
+    const clientId = this.value;
+
+    if (clientId) {
+      vehicleSelect.innerHTML = '<option value="">Carregando...</option>';
+      fetch(`/users_backoffice/vehicles/by_cliente?client_id=${clientId}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Dados recebidos:', data); // Adicione esta linha
+          vehicleSelect.innerHTML = '<option value="">Selecione um veículo</option>';
+
+          data.forEach(function(vehicle) {
+            console.log('Veículo:', vehicle); // Adicione esta linha
+            const option = document.createElement('option');
+            option.value = vehicle.id;
+            option.text = vehicle.model;
+            vehicleSelect.appendChild(option);
+          });
+        })
+        .catch(error => {
+          vehicleSelect.innerHTML = '<option value="">Erro ao carregar veículos</option>';
+          console.error('Erro ao buscar veículos:', error);
+        });
+    } else {
+      vehicleSelect.innerHTML = '<option value="">Selecione um veículo</option>';
     }
-
-    // Adiciona ouvintes de eventos para os eventos input, change, blur e focus
-    vehicleModelFilter.addEventListener('input', filterOptions);
-    vehicleModelFilter.addEventListener('change', filterOptions);
-    vehicleModelFilter.addEventListener('blur', filterOptions);
-    vehicleModelFilter.addEventListener('focus', filterOptions);
   });
+});
+
 </script>

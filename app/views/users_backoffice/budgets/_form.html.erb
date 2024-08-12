@@ -22,7 +22,6 @@
                   <% end %>
                 </div>
 
-                <!-- Adicionar campos dinâmicos para serviços, quantidades e valores -->
               <div id="items-container">
               <%= f.simple_fields_for :budget_line_items do |budget_line_item_fields| %>
                 <div class="item">
@@ -41,7 +40,6 @@
                 </div>
               <% end %>
               </div>
-
 
                 <button type="button" id="add-item-btn" class="btn btn-primary">Adicionar Item</button>
 
@@ -85,18 +83,15 @@
     `;
     itemsContainer.appendChild(newItem);
 
-    // Recalcula o total ao adicionar um novo item
     calculateTotal();
   });
 
-  // Recalcula o total sempre que houver uma mudança nos campos de quantidade ou preço unitário dos itens existentes
   document.addEventListener("input", function(event) {
     if (event.target.matches("[name^='budget[budget_line_items_attributes]']")) {
       calculateTotal();
     }
   });
   
-  // Função para calcular o total dos itens
   function calculateTotal() {
     var totalValue = 0;
     var itemContainers = document.querySelectorAll(".item");

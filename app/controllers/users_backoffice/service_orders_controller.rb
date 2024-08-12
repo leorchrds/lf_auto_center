@@ -24,16 +24,12 @@ module UsersBackoffice
     def edit; end
 
     def create
-          
       @service_order = ServiceOrder.new(service_order_params)
 
-      
-      vehicle_model = params[:vehicle_model] # Modelo selecionado na view
+      vehicle_model = params[:vehicle_model]
       vehicle = Vehicle.find_by(model: vehicle_model)
 
-      # Associe o veículo à ordem de serviço, se encontrado
       @service_order.vehicle = vehicle if vehicle
-
 
       respond_to do |format|
         if @service_order.save
@@ -47,6 +43,17 @@ module UsersBackoffice
         end
       end
     end
+
+    def update
+      respond_to do |format|
+        if @service_order.update(service_order_params)
+          format.html { redirect_to users_backoffice_service_order_path, notice: 'ordem de serviço atualizada com sucesso.' }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+        end
+      end
+    end
+
 
     def destroy
       @service_order.destroy
@@ -66,7 +73,7 @@ module UsersBackoffice
 
     def service_order_params
       params.require(:service_order).permit(
-        :client_id, :vehicle_id, :mileage, :entry_time, :exit_time,
+        :client_id, :vehicle_id, :service_value, :payment_method, :mileage, :entry_time, :exit_time,
         :entry_date, :exit_date, :description, address_attributes:
         %i[street number complement neighborhood city state postal_code country]
       )

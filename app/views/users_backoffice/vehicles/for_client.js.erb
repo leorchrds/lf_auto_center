@@ -1,0 +1,5 @@
+$('.vehicle_selection').empty();
+$('.vehicle_selection').append($('<option value="">Selecione um veículo</option>'));
+<% @vehicles.each do |vehicle| %>
+  $('.vehicle_selection').append($('<option value="<%= vehicle.id %>"><%= vehicle.model %></option>'));
+<% end %>

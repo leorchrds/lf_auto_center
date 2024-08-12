@@ -44,6 +44,17 @@ module UsersBackoffice
       end
     end
 
+    def generate_pdf
+      @budget = Budget.find(params[:id])
+      respond_to do |format|
+        format.pdf do
+          render pdf: 'budget_pdf',
+                 template: 'users_backoffice/budgets/pdf_template.html.erb',
+                 layout: 'pdf.html'
+        end
+      end
+    end
+
     private
 
     def set_budget

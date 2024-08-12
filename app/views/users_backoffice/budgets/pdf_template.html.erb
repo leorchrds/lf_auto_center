@@ -1,0 +1,51 @@
+<div class="pdf-header">
+  <header style="display: flex; align-items: center; text-align: center">
+    <div class="logo">
+      <img src="https://i.postimg.cc/gcKYy7yQ/logonova1.png" alt="Logo da Oficina" width="400" height="150">
+    </div>
+  </header>
+</div>
+
+<h1 style="text-align: center; font-family: Arial, sans-serif;">Orçamento</h1>
+
+ <p>Cliente: <%= "#{@budget.client.name.upcase}," %> Telefone: <%= "#{@budget.client.phone.upcase}"%> </p>
+
+  <% if @budget.client.vehicles.present? %>
+    <% @budget.client.vehicles.each do |vehicle| %>
+      <p>Veículo: <%= "#{vehicle.brand.upcase} - #{vehicle.model.upcase}," %> Placa: <%= "#{vehicle.license_plate.upcase},"%> Cor: <%= "#{vehicle.color.upcase}"%> </p>  
+    <% end %>
+  <% else %>
+    <p>O cliente não possui veículos associados.</p>
+  <% end %>
+  
+
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid black; padding: 8px;">Serviço</th>
+      <th style="border: 1px solid black; padding: 8px;">Quantidade</th>
+      <th style="border: 1px solid black; padding: 8px;">Preço Unitário</th>
+      <th style="border: 1px solid black; padding: 8px;">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% total_items_price = 0 %>
+  <% @budget.budget_line_items.each do |budget_line_item| %>
+    <% item_total = budget_line_item.quantity * budget_line_item.unit_price %>
+    <% total_items_price += item_total %>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;"><%= budget_line_item.service_name.upcase %></td>
+      <td style="border: 1px solid black; padding: 8px;"><%= budget_line_item.quantity %></td>
+      <td style="border: 1px solid black; padding: 8px;"><%= number_to_currency(budget_line_item.unit_price) %></td>
+      <td style="border: 1px solid black; padding: 8px;"><%= number_to_currency(item_total) %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
+<p style="margin-top: 20px;">Total do Orçamento: <span style="font-weight: bold;"><%= number_to_currency(total_items_price) %></span></p>
+
+
+<p>Emitido em: <%= Time.now.strftime("%d/%m/%Y") %></p>
+<p>Válido até: <%= (Time.now + 3.months).strftime("%d/%m/%Y") %></p>
+
