@@ -6,10 +6,12 @@ Este projeto está em constante desenvolvimento, com novos recursos sendo adicio
 
 ## Funcionalidades Atuais
 
-- Cadastro de clientes e veículos
+- Cadastro e controle de clientes e veículos
 - Geração de ordens de serviço
 - Controle de serviços
-
+- controle de orçamentos
+##
+https://github.com/leorchrds/lf_auto_center/assets/122051228/9b8ae774-e165-41d8-96a9-a6b3df56490b
 ## Uso Particular
 
 O LF Auto Center foi desenvolvido para atender às necessidades específicas da nossa oficina mecânica. Embora estejamos compartilhando o código fonte publicamente, é importante observar que algumas características ou personalizações podem refletir as particularidades do nosso ambiente de trabalho. No entanto, encorajamos outros proprietários de oficinas a explorar e adaptar o sistema às suas próprias necessidades.
@@ -17,6 +19,9 @@ O LF Auto Center foi desenvolvido para atender às necessidades específicas da 
 ## Contribuindo
 
 Nós valorizamos muito a contribuição da comunidade para o projeto LF Auto Center. Se você tiver ideias para melhorias, encontrar bugs ou quiser colaborar de qualquer forma, fique à vontade para abrir uma issue ou enviar um pull request.
+
+
+
 
 ## Tecnologias utilizadas
 - [Ruby](https://www.ruby-lang.org/pt/) (2.5.0)
@@ -27,7 +32,12 @@ Nós valorizamos muito a contribuição da comunidade para o projeto LF Auto Cen
 - [Devise](https://github.com/heartcombo/devise) para autenticação
 - [Rails-I18n](https://github.com/svenfuchs/rails-i18n) para internacionalização
 - [Kaminari](https://github.com/kaminari/kaminari) para paginação
-- 
+- [Bootstrap](https://github.com/twbs/bootstrap-rubygem) para estilos front-end
+- [HTTParty](https://github.com/jnunemaker/httparty) para requisições HTTP
+- [Simple Form](https://github.com/heartcombo/simple_form) para formulários simplificados
+- [RSpec Rails](https://github.com/rspec/rspec-rails) para testes
+- [Faker](https://github.com/faker-ruby/faker) para geração de dados fictícios
+
 ## Instruções para uso
 Clone o projeto em sua máquina e instale as dependências do projeto com os comandos:
 ```bash
